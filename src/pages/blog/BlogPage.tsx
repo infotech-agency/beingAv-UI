@@ -32,9 +32,9 @@ export default async function BlogPage({
     }),
   ]);
 
-  const categories = categoriesRes?.length ? categoriesRes : fallbackBlogCategories;
+  const categories = categoriesRes?.length ? categoriesRes : '';
   // const posts = blogRes?.data?.length ? blogRes.data : fallbackBlogPosts;
-  const posts = blogRes?.items?.length ? blogRes.items : fallbackBlogPosts;
+  const posts = blogRes?.items?.length ? blogRes.items : '';
     // const posts = blogRes;
   console.log("blogs posts", posts)
 

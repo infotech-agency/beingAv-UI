@@ -1947,15 +1947,16 @@ export function Navbar() {
 
       {/* Products mega dropdown - Compact row-wise layout */}
 {/* Products mega dropdown - Improved with better spacing and bolder red lines */}
+
 {openMega && (
   <div
     className="absolute left-0 top-full z-40 hidden w-full border-t border-border bg-white shadow-xl lg:block"
     onMouseEnter={() => handleEnter(setOpenMega)}
     onMouseLeave={handleLeave}
   >
-    <div className="container-page py-5">
-      {/* Header - compact */}
-      <div className="mb-3 flex items-center justify-between">
+    <div className="container-page py-4">
+      {/* Header - tighter */}
+      <div className="mb-2 flex items-center justify-between">
         <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
           Product Categories
         </span>
@@ -1969,16 +1970,16 @@ export function Navbar() {
         </Link>
       </div>
 
-      {/* Categories grid - tighter spacing */}
-      <div className="grid grid-cols-3 gap-x-6 gap-y-2">
+      {/* Categories grid - 4 columns, minimal gaps */}
+      <div className="grid grid-cols-4 gap-x-4 gap-y-1">
         {topLevelCategories.map((cat) => {
           const subCats = getSubCategories(cat._id);
           return (
             <div
               key={cat._id}
-              className="flex flex-col border-l-[3px] border-destructive pl-3 py-1"
+              className="flex flex-col"
             >
-              {/* Category name - bolder */}
+              {/* Category name - no extra padding */}
               <Link
                 href={`/products/category/${cat.slug}`}
                 className="text-sm font-bold text-foreground transition-colors hover:text-destructive"
@@ -1987,14 +1988,14 @@ export function Navbar() {
                 {cat.name}
               </Link>
 
-              {/* Subcategories - tighter spacing */}
+              {/* Subcategories with red border & background boxes - tighter */}
               {subCats.length > 0 && (
-                <ul className="mt-1 space-y-0.5">
+                <ul className="mt-0.5 border-l-[3px] border-destructive pl-2.5 space-y-0.5">
                   {subCats.slice(0, 6).map((sub) => (
                     <li key={sub._id}>
                       <Link
                         href={`/products/category/${sub.slug}`}
-                        className="text-xs text-muted-foreground transition-colors hover:text-destructive hover:underline"
+                        className="block rounded-md bg-muted/20 px-1.5 py-0.5 text-xs text-foreground transition-colors hover:bg-muted/40 hover:text-destructive hover:underline"
                         onClick={closeAllDropdowns}
                       >
                         {sub.name}
@@ -2008,7 +2009,7 @@ export function Navbar() {
               {subCats.length > 0 && (
                 <Link
                   href={`/products/category/${cat.slug}`}
-                  className="mt-1 inline-flex items-center gap-1 text-[10px] font-semibold text-destructive hover:gap-2 transition-all"
+                  className="mt-0.5 inline-flex items-center gap-1 text-[10px] font-semibold text-destructive hover:gap-2 transition-all"
                   onClick={closeAllDropdowns}
                 >
                   View all
@@ -2019,29 +2020,11 @@ export function Navbar() {
           );
         })}
       </div>
-
-      {/* Brand collections - tighter */}
-      <div className="mt-4 border-t border-border/50 pt-3">
-        <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
-          Learn More About Our Brand Collections
-        </span>
-        <div className="mt-1.5 flex flex-wrap gap-4">
-          {topLevelCategories.slice(0, 3).map((cat) => (
-            <Link
-              key={cat._id}
-              href={`/products/category/${cat.slug}`}
-              className="text-xs font-medium text-foreground transition-colors hover:text-destructive"
-              onClick={closeAllDropdowns}
-            >
-              {cat.name}
-            </Link>
-          ))}
-        </div>
-      </div>
     </div>
   </div>
 )}
-      {/* Services dropdown with icons */}
+
+   {/* Services dropdown with icons */}
       {openServices && (
         <div
           className="absolute left-1/2 top-full z-40 hidden -translate-x-1/2 border-t border-border bg-white shadow-xl lg:block"

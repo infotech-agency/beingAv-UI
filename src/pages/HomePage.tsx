@@ -34,6 +34,7 @@ import {
 
 } from 'lucide-react';
 import Banner from '@/components/section/Banner';
+import CategoryBrowse from '@/components/CategoryBrowse';
 
 export default async function HomePage() {
   const [bannersRes, categoriesRes, productsRes, blogRes, caseStudiesRes, testimonialsRes] =
@@ -134,14 +135,14 @@ export default async function HomePage() {
 
   // Showcase grid images (static marketing — real AV installation imagery)
   const showcaseImages = [
-    { url: 'https://azcorporateinteriors.com/wp-content/uploads/6-Conference-And-Meeting-Room-Styles-1024x683.jpg',label: 'Confrence Room'},
-    { url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDVqAB8RzdRKpvqsOvWi9b7MNqY558uBbfP0p5y85XJuvulXNU_x5Ge2XM&s=10',
+    { url: 'https://cdn.pixabay.com/photo/2015/07/02/09/52/meeting-room-828547_1280.jpg',label: 'Confrence Room'},
+    { url: 'https://img.magnific.com/free-photo/rows-red-seats-theater_53876-64712.jpg?semt=ais_hybrid&w=740&q=80',
       label: 'Auditorium'
     },
-    { url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2oMwJzMdsl6N-DIVO_32cJuAAnlHPEH8dAcSprvwsSmAduacet7nkfBc&s=10',label: 'Control Room' },
+    { url: 'https://cdn.pixabay.com/photo/2016/11/23/14/49/controls-1853330_1280.jpg',label: 'Control Room' },
     { url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcX0YZAtX1FMTCwwXu6HuHuPKQ1nA5dxJWscCDQSmpFFDk0OITMrjgoM_Z&s=10', label: 'AV Distribution' },
     { url: 'https://static.vecteezy.com/system/resources/thumbnails/046/925/027/small/data-center-with-network-servers-yellow-cables-blinking-lights-high-connectivity-showing-modern-it-infrastructure-photo.jpg', label: 'Network Infrastructure' },
-    { url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT27RttSgbqEetQPNhlkB5rPJEnS6eq3GHXN0w3l0ax9Z0OBhOpuhM5nJU&s=10', label: 'Video Streaming' },
+    { url: 'https://images.unsplash.com/photo-1550615511-c317ce7f1d03?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHZpZGVvJTIwc3RyZWFtaW5nfGVufDB8fDB8fHww', label: 'Video Streaming' },
   ];
 
   return (
@@ -149,30 +150,14 @@ export default async function HomePage() {
       <HeroSlider banners={banners} />
 
       {/* Product Types — what BeingAV makes */}
-      <section className="section-padding bg-white">
+      {/* <section className="section-padding bg-white">
         <div className="container-page">
           <SectionHeading
             eyebrow="What We Make"
             title="Pro AV hardware for every signal path"
             description="From matrix switchers to AV over IP, BeingAV designs and manufactures the hardware that powers professional AV installations."
           />
-          {/* <div className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-            {productTypes.map((pt) => (
-             
-              <div
-  key={pt.title}
-  className="group relative flex items-start gap-4 bg-white p-6 transition-all duration-300 hover:z-10 hover:bg-secondary/40 hover:ring-2 hover:ring-destructive hover:shadow-lg hover:shadow-destructive/30"
->
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-secondary text-foreground transition-colors group-hover:bg-destructive/10 group-hover:text-destructive">
-                  <pt.icon className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-foreground">{pt.title}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{pt.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div> */}
+          
           <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
   {productTypes.map((pt) => (
     // <div
@@ -194,54 +179,55 @@ export default async function HomePage() {
   ))}
 </div>
         </div>
-      </section>
-
+      </section> */}
+         <CategoryBrowse/>
       {/* Featured Products — WyreStorm style with spec tags */}
-      <section className="section-padding bg-secondary/30">
-        <div className="container-page">
-          <div className="flex items-end justify-between">
-            <SectionHeading
-              eyebrow="Featured Products"
-              title="Engineered for performance"
-              description="Pro AV hardware trusted by integrators worldwide."
-              align="left"
-            />
-            <Link
-              href="/products"
-              className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-destructive hover:gap-2 transition-all sm:inline-flex"
-            >
-              View all products
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {displayProducts.map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))}
-          </div>
-        </div>
-      </section>
+     <section className="section-padding relative overflow-hidden bg-black">
+  {/* Gradient blur background */}
+  <div className="pointer-events-none absolute inset-0">
+    {/* Red glow - top left */}
+    <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-destructive/40 blur-[120px]" />
+    {/* Red glow - bottom right */}
+    <div className="absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full bg-destructive/30 blur-[120px]" />
+    {/* Subtle center glow for depth */}
+    <div className="absolute top-1/2 left-1/2 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-destructive/10 blur-[150px]" />
+    {/* Optional grid/noise overlay for texture */}
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)]" />
+  </div>
+
+  <div className="container-page relative z-10">
+    <div className="flex items-end justify-between">
+      <SectionHeading
+        eyebrow="Featured Products"
+        title="Engineered for performance"
+        description="Pro AV hardware trusted by integrators worldwide."
+        align="left"
+          titleClassName="text-white"
+      />
+      <Link
+        href="/products"
+        className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-destructive hover:gap-2 transition-all sm:inline-flex"
+      >
+        View all products
+        <ArrowRight className="h-4 w-4" />
+      </Link>
+    </div>
+    <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {displayProducts.map((product) => (
+        <ProductCard key={product._id} product={product} />
+      ))}
+    </div>
+  </div>
+</section>
 
     {/* Product Categories strip */}
-<section className="section-padding-sm bg-white">
+{/* <section className="section-padding-sm bg-white">
   <div className="container-page">
     <SectionHeading
       eyebrow="Product Categories"
       title="Browse by category"
     />
-    {/* <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-      {categories.map((cat) => (
-        <Link
-          key={cat._id}
-          href={`/products/category/${cat.slug}`}
-          className="group inline-flex items-center justify-center gap-2 rounded-full border border-border bg-white px-6 py-3.5 text-base font-medium text-foreground transition-all duration-300 hover:border-destructive hover:text-destructive hover:shadow-[0_0_20px_rgba(220,38,38,0.4)]"
-        >
-          <Boxes className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-destructive" />
-          {cat.name}
-          <ArrowRight className="h-4 w-4 opacity-0 transition-all group-hover:opacity-100" />
-        </Link>
-      ))}
-    </div> */}
+   
     <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
   {parentCategories.map((cat) => (
     <Link
@@ -256,38 +242,78 @@ export default async function HomePage() {
   ))}
 </div>
   </div>
-</section>
-
+</section> */}
+     
       {/* Showcase / Installation gallery — WyreStorm style */}
-      <section className="section-padding bg-secondary/30">
-        <div className="container-page">
-          <SectionHeading
-            // eyebrow="Installations"
-            title="AV systems in the field"
-            description="Real-world deployments powered by BeingAV hardware — from boardrooms to broadcast studios."
+    <section className="section-padding bg-gray-100">
+  <div className="container-page">
+    <SectionHeading
+      title="AV systems in the field"
+      description="Real-world deployments powered by BeingAV hardware — from boardrooms to broadcast studios."
+    />
+    <div className="mt-12 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3">
+      {showcaseImages.map((img, i) => (
+        <div
+          key={i}
+          className="group relative aspect-[4/3] overflow-hidden rounded-lg border-2 border-red-500/60 bg-gray-800/20 shadow-[0_0_20px_rgba(220,38,38,0.3)] transition-all duration-300 hover:border-red-400 hover:shadow-[0_0_40px_rgba(220,38,38,0.6)]"
+        >
+          {/* Laser-scan lines (red shining) */}
+          <div className="pointer-events-none absolute inset-0 z-20 overflow-hidden">
+            <div className="absolute -top-[100%] left-0 h-[200%] w-[2px] rotate-12 bg-gradient-to-b from-transparent via-red-400/80 to-transparent blur-[1px] animate-laser-scan" />
+            <div className="absolute -top-[100%] left-[30%] h-[200%] w-[1px] rotate-12 bg-gradient-to-b from-transparent via-red-400/50 to-transparent blur-[2px] animate-laser-scan animation-delay-500" />
+            <div className="absolute -top-[100%] left-[70%] h-[200%] w-[1px] rotate-12 bg-gradient-to-b from-transparent via-red-400/40 to-transparent blur-[2px] animate-laser-scan animation-delay-1000" />
+          </div>
+
+          {/* Image */}
+          <Image
+            src={img.url}
+            alt={img.label}
+            fill
+            sizes="(max-width: 768px) 50vw, 33vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          <div className="mt-12 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3">
-            {showcaseImages.map((img, i) => (
-              <div
-                key={i}
-                className="group relative aspect-[4/3] overflow-hidden rounded-lg border border-border"
-              >
-                <Image
-                  src={img.url}
-                  alt={img.label}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 p-4">
-                  <span className="text-sm font-semibold text-white">{img.label}</span>
-                </div>
-              </div>
-            ))}
+
+          {/* 🔥 Greyish-red overlay — gives visible bg color */}
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-700/40 via-red-900/30 to-gray-800/50 mix-blend-multiply" />
+
+          {/* Red radial glow behind image (for extra glow) */}
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(220,38,38,0.2)_0%,transparent_70%)]" />
+
+          {/* Shimmer overlay on hover */}
+          <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+
+          {/* Dark gradient at bottom for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+
+          {/* Corner brackets */}
+          <div className="absolute left-2 top-2 z-10 h-4 w-4 border-l-2 border-t-2 border-red-400/80" />
+          <div className="absolute right-2 top-2 z-10 h-4 w-4 border-r-2 border-t-2 border-red-400/80" />
+          <div className="absolute bottom-2 left-2 z-10 h-4 w-4 border-l-2 border-b-2 border-red-400/80" />
+          <div className="absolute bottom-2 right-2 z-10 h-4 w-4 border-r-2 border-b-2 border-red-400/80" />
+
+          {/* Label */}
+          <div className="absolute bottom-0 left-0 z-10 p-4">
+            <span className="text-sm font-semibold text-white drop-shadow-lg">
+              {img.label}
+            </span>
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+
+  <style>{`
+    @keyframes laser-scan {
+      0% { transform: translateY(-100%) rotate(12deg); }
+      100% { transform: translateY(100%) rotate(12deg); }
+    }
+    .animate-laser-scan {
+      animation: laser-scan 3s linear infinite;
+    }
+    .animation-delay-500 { animation-delay: 0.5s; }
+    .animation-delay-1000 { animation-delay: 1s; }
+  `}</style>
+</section>
         
       {/* Industries */}
       {/* <section className="section-padding bg-white">
@@ -387,12 +413,40 @@ export default async function HomePage() {
         </div>
       </section> */}
         {/* Why Choose BeingAV — dark split section */}
-<section className="bg-[#0A0A0A]">
-  <div className="container-page grid grid-cols-1 items-center gap-0 lg:grid-cols-2 p-6">
+<section className="relative overflow-hidden bg-[#0A0A0A]">
+  {/* Grid background */}
+  <div className="absolute inset-0">
+    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(220,38,38,0.15)_0%,transparent_60%)]" />
+    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_20%,rgba(220,38,38,0.08)_0%,transparent_50%)]" />
+    
+    {/* Grid lines */}
+    <div 
+      className="absolute inset-0"
+      style={{
+        backgroundImage: `
+          linear-gradient(rgba(220,38,38,0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(220,38,38,0.06) 1px, transparent 1px)
+        `,
+        backgroundSize: '48px 48px',
+      }}
+    />
+    
+    {/* Horizontal accent glow */}
+    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/40 to-transparent" />
+    <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/20 to-transparent" />
+  </div>
+
+  <div className="container-page relative grid grid-cols-1 items-center gap-0 lg:grid-cols-2">
     {/* Left: content */}
     <div className="py-16 pr-0 lg:py-24 lg:pr-16">
+      <div className="mb-3 flex items-center gap-2">
+        <span className="h-1 w-8 rounded-full bg-red-600" />
+        <span className="text-xs font-medium uppercase tracking-[0.2em] text-red-500">
+          Why BeingAV
+        </span>
+      </div>
       <h2 className="text-3xl font-semibold text-white sm:text-4xl">
-        Why Choose BeingAV
+        Why Choose <span className="text-red-500">BeingAV</span>
       </h2>
       <p className="mt-6 text-base leading-relaxed text-white/70">
         BeingAV is a specialist manufacturer of Pro AV hardware, engineering
@@ -400,27 +454,40 @@ export default async function HomePage() {
         around the world.
       </p>
       <p className="mt-4 text-base leading-relaxed text-white/70">
-        Backed by ISO-certified manufacturing and global technical support,
+        Backed by certified manufacturing and global technical support,
         BeingAV powers reliable AV deployments across corporate, education,
         government, healthcare, hospitality, and broadcast environments.
       </p>
       <Link
         href="/about"
-        className="mt-8 inline-flex items-center gap-2 rounded-md bg-white px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-red-600 hover:text-white"
+        className="group mt-8 inline-flex items-center gap-2 rounded-md bg-red-600 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-red-700 hover:shadow-lg hover:shadow-red-600/25"
       >
         Learn More About BeingAV
+        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
       </Link>
     </div>
 
-    {/* Right: image */}
+    {/* Right: image with red glow border */}
     <div className="relative aspect-[4/3] w-full lg:aspect-auto lg:h-[520px]">
-      <Image
-        src="https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=1200"
-        alt="BeingAV manufacturing facility"
-        fill
-        sizes="(max-width: 1024px) 100vw, 50vw"
-        className="object-cover"
-      />
+      {/* Glow border */}
+      <div className="absolute -inset-px rounded-lg bg-gradient-to-br from-red-600/30 via-transparent to-red-600/10 blur-sm" />
+      <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-red-600/20 via-transparent to-red-600/5" />
+      
+      <div className="relative h-full w-full overflow-hidden rounded-lg">
+        <Image
+          src="https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          alt="BeingAV manufacturing facility"
+          fill
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="object-cover"
+        />
+      </div>
+
+      {/* Corner accents */}
+      <div className="absolute -left-px -top-px h-8 w-8 border-l-2 border-t-2 border-red-500/60 rounded-tl-lg" />
+      <div className="absolute -right-px -top-px h-8 w-8 border-r-2 border-t-2 border-red-500/60 rounded-tr-lg" />
+      <div className="absolute -bottom-px -left-px h-8 w-8 border-l-2 border-b-2 border-red-500/60 rounded-bl-lg" />
+      <div className="absolute -bottom-px -right-px h-8 w-8 border-r-2 border-b-2 border-red-500/60 rounded-br-lg" />
     </div>
   </div>
 </section>
@@ -504,31 +571,64 @@ export default async function HomePage() {
       </section> */}
 
       {/* CTA strip */}
-      <section className="bg-destructive">
-        <div className="container-page py-16 text-center">
-          <h2 className="text-3xl font-bold text-white sm:text-4xl text-balance">
-            Planning a new AV project? Let&apos;s talk.
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-white/80">
-            Our team is ready to help you design, deploy, and support your next AV installation.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 rounded-md bg-white px-7 py-3.5 text-sm font-semibold text-destructive shadow-lg transition-all hover:bg-white/90"
-            >
-              Request a Quote
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/products"
-              className="inline-flex items-center gap-2 rounded-md border border-white/40 px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-white/10"
-            >
-              Browse Products
-            </Link>
-          </div>
-        </div>
-      </section>
+    <section className="relative overflow-hidden bg-black">
+  {/* Base gradient - black to red diagonal */}
+  <div className="absolute inset-0 bg-gradient-to-br from-black via-destructive/20 to-black" />
+
+  {/* Radial glow blobs */}
+  <div className="pointer-events-none absolute inset-0">
+    <div className="absolute -top-32 left-1/4 h-[400px] w-[400px] rounded-full bg-destructive/40 blur-[130px]" />
+    <div className="absolute -bottom-32 right-1/4 h-[450px] w-[450px] rounded-full bg-destructive/30 blur-[140px]" />
+    <div className="absolute top-1/2 left-1/2 h-[300px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-destructive/20 blur-[160px]" />
+  </div>
+
+  {/* Grid texture overlay */}
+  <div
+    className="pointer-events-none absolute inset-0 opacity-[0.07]"
+    style={{
+      backgroundImage:
+        "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+      backgroundSize: "40px 40px",
+    }}
+  />
+
+  {/* Noise/grain texture */}
+  <div
+    className="pointer-events-none absolute inset-0 opacity-[0.15] mix-blend-overlay"
+    style={{
+      backgroundImage:
+        "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+    }}
+  />
+
+  {/* Vignette for depth */}
+  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,black_100%)]" />
+
+  {/* Content */}
+  <div className="container-page relative z-10 py-20 text-center">
+    <h2 className="text-3xl font-bold text-white sm:text-4xl text-balance">
+      Planning a new AV project? Let&apos;s talk.
+    </h2>
+    <p className="mx-auto mt-4 max-w-xl text-white/70">
+      Our team is ready to help you design, deploy, and support your next AV installation.
+    </p>
+    <div className="mt-8 flex flex-wrap justify-center gap-4">
+      <Link
+        href="/contact"
+        className="inline-flex items-center gap-2 rounded-md bg-destructive px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-destructive/30 transition-all hover:bg-destructive/90 hover:shadow-destructive/50"
+      >
+        Request a Quote
+        <ArrowRight className="h-4 w-4" />
+      </Link>
+      <Link
+        href="/products"
+        className="inline-flex items-center gap-2 rounded-md border border-white/20 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/40"
+      >
+        Browse Products
+      </Link>
+    </div>
+  </div>
+</section>
     </>
   );
 }

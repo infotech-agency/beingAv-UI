@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default async function CaseStudiesPage() {
   const res = await api.getCaseStudies();
-  const caseStudies = res?.length ? res : fallbackCaseStudies;
+  const caseStudies = res?.length ? res : 'No Case Studies Found';
   console.log("case studies", res)
 
   return (

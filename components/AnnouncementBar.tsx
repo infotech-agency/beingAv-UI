@@ -1,11 +1,11 @@
 
+
 // import { useState, useEffect } from 'react';
 // import Link from '@/components/RouterLink';
 // import Image from '@/components/Image';
 // import { api } from '@/lib/api';
 // import { fallbackAnnouncement } from '@/lib/fallback-data';
 // import type { AnnouncementBar as AnnouncementType } from '@/types';
-// import { ChevronRight } from 'lucide-react';
 
 // export function AnnouncementBar() {
 //   const [bar, setBar] = useState<AnnouncementType | null>(null);
@@ -23,24 +23,24 @@
 //     <div className="hidden border-b border-border bg-black md:block">
 //       <div className="container-page flex items-center gap-6 py-2 text-sm">
 
-//         {/* Marquee Text — single continuous scroll */}
-//         <div className="flex-1 overflow-hidden whitespace-nowrap">
-//           <div className="inline-block animate-[marquee_15s_linear_infinite]">
-//             <span className="font-medium text-white">{bar.text}</span>
-//           </div>
+//         {/* Marquee Text - Poora text hyperlinked hai */}
+//         <div className="flex-1 overflow-hidden">
+//           <marquee scrollamount="5">
+//             {bar.link ? (
+//               <Link 
+//                 href={bar.link} 
+//                 className="font-medium text-white hover:underline hover:text-gray-200"
+//               >
+//                 {bar.text}
+//               </Link>
+//             ) : (
+//               <span className="font-medium text-white">{bar.text}</span>
+//             )}
+//           </marquee>
 //         </div>
 
-//         {/* Right side — Learn More button + Logo, fixed at end */}
-//         <div className="flex shrink-0 items-center gap-4">
-//           {bar.link && (
-//             <Link
-//               href={bar.link}
-//               className="inline-flex items-center whitespace-nowrap font-semibold text-destructive hover:underline"
-//             >
-//               Learn more
-//               <ChevronRight className="ml-0.5 h-3.5 w-3.5" />
-//             </Link>
-//           )}
+//         {/* Right side — Fixed Logo */}
+//         <div className="flex shrink-0 items-center">
 //           <div className="rounded-md shadow-sm">
 //             <Image
 //               src="/images/whitelogo.png"
@@ -57,7 +57,7 @@
 //   );
 // }
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from '@/components/RouterLink';
 import Image from '@/components/Image';
 import { api } from '@/lib/api';
@@ -66,6 +66,7 @@ import type { AnnouncementBar as AnnouncementType } from '@/types';
 
 export function AnnouncementBar() {
   const [bar, setBar] = useState<AnnouncementType | null>(null);
+  const marqueeRef = useRef<HTMLMarqueeElement>(null);
 
   useEffect(() => {
     api.getAnnouncementBar().then((data) => {
@@ -76,16 +77,31 @@ export function AnnouncementBar() {
 
   if (!bar || !bar.isActive) return null;
 
+  const handleMouseEnter = () => {
+    if (marqueeRef.current) {
+      marqueeRef.current.stop(); // pause scrolling
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (marqueeRef.current) {
+      marqueeRef.current.start(); // resume scrolling
+    }
+  };
+
   return (
     <div className="hidden border-b border-border bg-black md:block">
       <div className="container-page flex items-center gap-6 py-2 text-sm">
-
-        {/* Marquee Text - Poora text hyperlinked hai */}
         <div className="flex-1 overflow-hidden">
-          <marquee scrollamount="5">
+          <marquee
+            ref={marqueeRef}
+            scrollamount="5"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
             {bar.link ? (
-              <Link 
-                href={bar.link} 
+              <Link
+                href={bar.link}
                 className="font-medium text-white hover:underline hover:text-gray-200"
               >
                 {bar.text}
@@ -96,7 +112,6 @@ export function AnnouncementBar() {
           </marquee>
         </div>
 
-        {/* Right side — Fixed Logo */}
         <div className="flex shrink-0 items-center">
           <div className="rounded-md shadow-sm">
             <Image
@@ -108,7 +123,6 @@ export function AnnouncementBar() {
             />
           </div>
         </div>
-
       </div>
     </div>
   );
