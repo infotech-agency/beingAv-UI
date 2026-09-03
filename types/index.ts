@@ -228,3 +228,11 @@ export interface PaginatedResponse<T> {
     totalPages: number;
   };
 }
+
+
+export interface AboutUs {
+  _id: string;
+  content: string;
+  metaTitle: string;
+  metaDescription: string;
+}

@@ -132,6 +132,7 @@
 // };
 
 import type {
+  AboutUs,
   AnnouncementBar,
   Banner,
   BlogCategory,
@@ -246,6 +247,7 @@ export const api = {
   getAnnouncementBar: () =>
     apiFetch<AnnouncementBar>('/public/announcement-bar'),
   getContactInfo: () => apiFetch<ContactInfo>('/public/contact-info'),
+  getAboutUs: () => apiFetch<AboutUs>('/public/about-us'), 
 
   submitContact: (data: {
     name: string;

@@ -47,8 +47,8 @@ export default async function HomePage() {
       api.getTestimonials(),
     ]);
 
-  const banners = bannersRes?.length ? bannersRes : fallbackBanners;
-  const categories = categoriesRes?.length ? categoriesRes : fallbackCategories;
+  const banners = bannersRes?.length ? bannersRes : '';
+  const categories = categoriesRes?.length ? categoriesRes : '';
   const subCategories = categories.filter((cat) => cat.parentCategory);
   const parentCategories = categories.filter((cat) => !cat.parentCategory);
   // FIX: API returns { items, total, page, limit, totalPages } — not { data, pagination }
@@ -56,9 +56,9 @@ export default async function HomePage() {
   // NOTE: assuming /public/blog follows the same { items, ... } convention as /public/products.
   // Verify against the real blog API response — revert to `.data` if it actually returns that shape.
   // const blogPosts = blogRes?.data?.length ? blogRes.data : fallbackBlogPosts;
-  const blogPosts = blogRes?.items?.length ? blogRes.items : fallbackBlogPosts;
-  const caseStudies = caseStudiesRes?.length ? caseStudiesRes : fallbackCaseStudies;
-  const testimonials = testimonialsRes?.length ? testimonialsRes : fallbackTestimonials;
+  const blogPosts = blogRes?.items?.length ? blogRes.items : '';
+  const caseStudies = caseStudiesRes?.length ? caseStudiesRes : '';
+  const testimonials = testimonialsRes?.length ? testimonialsRes : '';
   const featuredProducts = products.filter((p) => p.isFeatured).slice(0, 4);
   const displayProducts = featuredProducts.length ? featuredProducts : products.slice(0, 4);
 
@@ -571,11 +571,22 @@ export default async function HomePage() {
       </section> */}
 
       {/* CTA strip */}
-    <section className="relative overflow-hidden bg-black">
-  {/* Base gradient - black to red diagonal */}
-  <div className="absolute inset-0 bg-gradient-to-br from-black via-destructive/20 to-black" />
+<section className="relative overflow-hidden bg-black">
+  {/* === BACKGROUND IMAGE (new) === */}
+  <div
+    className="absolute inset-0 bg-contain bg-center"
+    style={{
+      backgroundImage: "url('/images/cta.jpeg')",
+    }}
+  />
 
-  {/* Radial glow blobs */}
+  {/* Semi‑transparent dark overlay – image ko dark kar ke contrast improve karta hai */}
+  <div className="absolute inset-0 bg-black/60" />
+
+  {/* Original gradient overlay (abhi light hai, image ke upar layered) */}
+  <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-destructive/20 to-black/80" />
+
+  {/* Radial glow blobs – image ke upar hi rahenge */}
   <div className="pointer-events-none absolute inset-0">
     <div className="absolute -top-32 left-1/4 h-[400px] w-[400px] rounded-full bg-destructive/40 blur-[130px]" />
     <div className="absolute -bottom-32 right-1/4 h-[450px] w-[450px] rounded-full bg-destructive/30 blur-[140px]" />
@@ -597,7 +608,7 @@ export default async function HomePage() {
     className="pointer-events-none absolute inset-0 opacity-[0.15] mix-blend-overlay"
     style={{
       backgroundImage:
-        "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+        "url(/images/cta.jpeg)",
     }}
   />
 
@@ -607,7 +618,7 @@ export default async function HomePage() {
   {/* Content */}
   <div className="container-page relative z-10 py-20 text-center">
     <h2 className="text-3xl font-bold text-white sm:text-4xl text-balance">
-      Planning a new AV project? Let&apos;s talk.
+      Planning a new AV project? Let&apos;s Connect.
     </h2>
     <p className="mx-auto mt-4 max-w-xl text-white/70">
       Our team is ready to help you design, deploy, and support your next AV installation.
