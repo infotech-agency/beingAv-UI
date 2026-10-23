@@ -37,9 +37,16 @@ const pageSeo: Record<string, { title: string; description: string }> = {
   '/services': { title: 'Services — AV Design, Installation & Support', description: 'From system design to installation and ongoing support, BeingAV provides end-to-end services for Pro AV deployments.' },
 };
 
-function Dynamic({ component, getMetadata }: { component: (props: { params: { slug: string } }) => Promise<React.ReactNode>; getMetadata?: (props: { params: { slug: string } }) => Promise<Metadata> }) {
+// function Dynamic({ component, getMetadata }: { component: (props: { params: { slug: string } }) => Promise<React.ReactNode>; getMetadata?: (props: { params: { slug: string } }) => Promise<Metadata> }) {
+//   const { slug = '' } = useParams();
+//   return <AsyncPage component={component} getMetadata={getMetadata} props={{ params: { slug } }} />;
+// }
+
+function Dynamic({ component, getMetadata }: { component: (props: { params: { slug: string }; searchParams?: Record<string, string> }) => Promise<React.ReactNode>; getMetadata?: (props: { params: { slug: string }; searchParams?: Record<string, string> }) => Promise<Metadata> }) {
   const { slug = '' } = useParams();
-  return <AsyncPage component={component} getMetadata={getMetadata} props={{ params: { slug } }} />;
+  const { search } = useLocation();
+  const searchParams = Object.fromEntries(new URLSearchParams(search));
+  return <AsyncPage component={component} getMetadata={getMetadata} props={{ params: { slug }, searchParams }} />;
 }
 
 function QueryPage({ component }: { component: (props: { searchParams: Record<string, string> }) => Promise<React.ReactNode> }) {

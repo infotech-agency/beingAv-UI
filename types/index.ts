@@ -236,3 +236,14 @@ export interface AboutUs {
   metaTitle: string;
   metaDescription: string;
 }
+
+export interface Warranty {
+  content: string;
+  metaTitle: string;
+  metaDescription: string;
+}
+
+export interface ProductVariant {
+  name: string;       // e.g. "Length", "Color"
+  options: string[];  // e.g. ["15m", "25m", "30m"]
+}

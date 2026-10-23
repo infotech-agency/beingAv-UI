@@ -132,7 +132,6 @@ export function HeroSlider({ banners }: HeroSliderProps) {
 
   const count = banners.length;
 
-  console.log('banners:', banners);
 
   const next = useCallback(() => {
     if (count <= 1) return;

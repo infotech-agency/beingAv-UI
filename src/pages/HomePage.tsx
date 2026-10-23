@@ -35,6 +35,8 @@ import {
 } from 'lucide-react';
 import Banner from '@/components/section/Banner';
 import CategoryBrowse from '@/components/CategoryBrowse';
+import { link } from 'node:fs';
+import { IndustriesSection } from '@/components/IndustriesSection';
 
 export default async function HomePage() {
   const [bannersRes, categoriesRes, productsRes, blogRes, caseStudiesRes, testimonialsRes] =
@@ -77,39 +79,45 @@ export default async function HomePage() {
   const industries = [
   {
     icon: Building2,
-    title: 'Corporate',
+    title: 'Corporate & Enterprises',
     desc: 'Meeting rooms, training rooms, and executive spaces.',
     image: 'https://3.imimg.com/data3/BJ/OK/MY-4404215/cooperate-office-interior.jpg',
+    link:"/ervices/corporate-and-enterprise",
   },
   {
     icon: GraduationCap,
-    title: 'Education',
+    title: 'Education & Learning',
     desc: 'Smart classrooms, lecture halls, and hybrid learning.',
     image: 'https://ceeco.in/blog/wp-content/uploads/2024/07/Image-1-1-scaled.jpg',
+    link:"/services/education-and-learning"
   },
   {
     icon: Landmark,
-    title: 'Government',
+    title: 'House of Worship',
     desc: 'Command centers and secure government facilities.',
     image: 'https://www.advanosys.com/wp-content/uploads/2015/05/services-security-solutions-SECURITY-CONTROL-COMMAND-CENTER-1.jpg',
+    link:"/services/house-of-worship"
   },
   {
     icon: Hospital,
     title: 'Healthcare',
     desc: 'Medical AV, telemedicine, and digital signage.',
     image: 'https://resurgent.co.in/wp-content/themes/resurgent/assets/home/healthcare.webp',
+    link:"/services/healthcare"
   },
   {
     icon: Hotel,
-    title: 'Hospitality',
+    title: 'Hospitality & Entertainment',
     desc: 'Guest room entertainment and event venues.',
     image: 'https://content.jdmagicbox.com/comp/def_content/banquet-halls/banquet-halls-2-banquet-halls-15-iuu57.jpg',
+    link:"/services/hospitality-and-entertainment"
   },
   {
     icon: Radio,
-    title: 'Broadcast',
+    title: 'Broadcast & Media',
     desc: 'Production studios and broadcast facilities.',
     image: 'https://www.theswitch.tv/wp-content/uploads/the-switch-production-control-1156x650.jpg',
+    link:"/services/broadcast-and-media"
   },
 ];
 
@@ -135,7 +143,7 @@ export default async function HomePage() {
 
   // Showcase grid images (static marketing — real AV installation imagery)
   const showcaseImages = [
-    { url: 'https://cdn.pixabay.com/photo/2015/07/02/09/52/meeting-room-828547_1280.jpg',label: 'Confrence Room'},
+    { url: 'https://cdn.pixabay.com/photo/2015/07/02/09/52/meeting-room-828547_1280.jpg',label: 'Conference Room'},
     { url: 'https://img.magnific.com/free-photo/rows-red-seats-theater_53876-64712.jpg?semt=ais_hybrid&w=740&q=80',
       label: 'Auditorium'
     },
@@ -245,7 +253,7 @@ export default async function HomePage() {
 </section> */}
      
       {/* Showcase / Installation gallery — WyreStorm style */}
-    <section className="section-padding bg-gray-100">
+   <section className="section-padding bg-gray-100">
   <div className="container-page">
     <SectionHeading
       title="AV systems in the field"
@@ -257,13 +265,6 @@ export default async function HomePage() {
           key={i}
           className="group relative aspect-[4/3] overflow-hidden rounded-lg border-2 border-red-500/60 bg-gray-800/20 shadow-[0_0_20px_rgba(220,38,38,0.3)] transition-all duration-300 hover:border-red-400 hover:shadow-[0_0_40px_rgba(220,38,38,0.6)]"
         >
-          {/* Laser-scan lines (red shining) */}
-          <div className="pointer-events-none absolute inset-0 z-20 overflow-hidden">
-            <div className="absolute -top-[100%] left-0 h-[200%] w-[2px] rotate-12 bg-gradient-to-b from-transparent via-red-400/80 to-transparent blur-[1px] animate-laser-scan" />
-            <div className="absolute -top-[100%] left-[30%] h-[200%] w-[1px] rotate-12 bg-gradient-to-b from-transparent via-red-400/50 to-transparent blur-[2px] animate-laser-scan animation-delay-500" />
-            <div className="absolute -top-[100%] left-[70%] h-[200%] w-[1px] rotate-12 bg-gradient-to-b from-transparent via-red-400/40 to-transparent blur-[2px] animate-laser-scan animation-delay-1000" />
-          </div>
-
           {/* Image */}
           <Image
             src={img.url}
@@ -273,16 +274,12 @@ export default async function HomePage() {
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
 
-          {/* 🔥 Greyish-red overlay — gives visible bg color */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-700/40 via-red-900/30 to-gray-800/50 mix-blend-multiply" />
-
-          {/* Red radial glow behind image (for extra glow) */}
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(220,38,38,0.2)_0%,transparent_70%)]" />
+          {/* Removed: greyish-red overlay & red radial glow */}
 
           {/* Shimmer overlay on hover */}
           <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
 
-          {/* Dark gradient at bottom for text readability */}
+          {/* Dark gradient at bottom for text readability (kept) */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
           {/* Corner brackets */}
@@ -301,117 +298,12 @@ export default async function HomePage() {
       ))}
     </div>
   </div>
-
-  <style>{`
-    @keyframes laser-scan {
-      0% { transform: translateY(-100%) rotate(12deg); }
-      100% { transform: translateY(100%) rotate(12deg); }
-    }
-    .animate-laser-scan {
-      animation: laser-scan 3s linear infinite;
-    }
-    .animation-delay-500 { animation-delay: 0.5s; }
-    .animation-delay-1000 { animation-delay: 1s; }
-  `}</style>
 </section>
         
-      {/* Industries */}
-      {/* <section className="section-padding bg-white">
-        <div className="container-page">
-          <SectionHeading
-            eyebrow="Industries We Serve"
-            title="Solutions for every sector"
-            description="From boardrooms to broadcast studios, BeingAV powers AV across industries."
-          />
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {industries.map((ind) => (
-             
-              <div
-  key={ind.title}
-  className="group rounded-lg border border-border bg-white p-6 transition-all duration-200 hover:border-red-800 hover:shadow-[0_20px_50px_-12px_rgba(153,27,27,0.45)]"
->
-  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-secondary text-foreground transition-colors group-hover:bg-destructive/10 group-hover:text-destructive">
-    <ind.icon className="h-5 w-5" />
-  </div>
-  <h3 className="mt-4 font-bold text-foreground">{ind.title}</h3>
-  <p className="mt-1.5 text-sm text-muted-foreground">{ind.desc}</p>
-</div>
-            ))}
-          </div>
-        </div>
-      </section> */}
-      <section className="section-padding bg-white">
-  <div className="container-page">
-    <SectionHeading
-      eyebrow="Industries We Serve"
-      title="Solutions for every sector"
-      description="From boardrooms to broadcast studios, BeingAV powers AV across industries."
-    />
-    <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {industries.map((ind) => (
-        <div key={ind.title} className="group h-56 [perspective:1000px]">
-          <div
-            className="relative h-full w-full rounded-lg transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]"
-          >
-            {/* Front */}
-            <div className="absolute inset-0 flex flex-col rounded-lg border border-border bg-white p-6 [backface-visibility:hidden]">
-              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-secondary text-foreground">
-                <ind.icon className="h-5 w-5" />
-              </div>
-              <h3 className="mt-4 font-bold text-foreground">{ind.title}</h3>
-              <p className="mt-1.5 text-sm text-muted-foreground">{ind.desc}</p>
-            </div>
 
-            {/* Back — image, revealed on flip */}
-            <div
-              className="absolute inset-0 overflow-hidden rounded-lg border border-red-800 shadow-[0_20px_50px_-12px_rgba(153,27,27,0.45)] [backface-visibility:hidden] [transform:rotateY(180deg)]"
-            >
-              <img
-                src={ind.image}
-                alt={ind.title}
-                className="h-full w-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-4">
-                <ind.icon className="h-5 w-5 text-white" />
-                <h3 className="mt-1.5 font-bold text-white">{ind.title}</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+  <IndustriesSection/>
       
-      {/* Why Choose BeingAV */}
-      {/* <section className="section-padding bg-secondary/30">
-        <div className="container-page">
-          <SectionHeading
-            eyebrow="Why BeingAV"
-            title="Built for integrators"
-            description="We combine engineering excellence with a partner-first approach to deliver AV solutions integrators trust."
-          />
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {whyChoose.map((item) => (
-              <div
-                key={item.title}
-                className="rounded-lg border border-border bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md"
-              >
-                <h3 className="font-bold text-foreground">{item.title}</h3>
-                <ul className="mt-4 space-y-2">
-                  {item.points.map((point) => (
-                    <li key={point} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-destructive" />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
+
         {/* Why Choose BeingAV — dark split section */}
 <section className="relative overflow-hidden bg-[#0A0A0A]">
   {/* Grid background */}

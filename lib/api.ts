@@ -146,10 +146,11 @@ import type {
   ProductListResponse,
   Service,
   Testimonial,
+    Warranty,
 } from '@/types';
 
 export const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || 'https://mediumvioletred-lobster-308070.hostingersite.com/api';
+  import.meta.env.VITE_API_BASE_URL || 'https://api.beingav.com/api';
 
 async function apiFetch<T>(path: string, init?: RequestInit): Promise<T | null> {
   try {
@@ -175,8 +176,8 @@ export const api = {
   health: () => apiFetch<{ status: string }>('/health'),
 
   getCategories: () => apiFetch<Category[]>('/public/categories'),
-  getCategoryBySlug: (slug: string) =>
-    apiFetch<Category>(`/public/categories/${slug}`),
+  // getCategoryBySlug: (slug: string) =>
+  //   apiFetch<Category>(`/public/categories/${slug}`),
 
   // getProducts: (params: {
   //   category?: string;
@@ -195,31 +196,52 @@ export const api = {
   //   return apiFetch<ProductListResponse>(`/public/products?${q.toString()}`);
   // },
 
-    getProducts: (params: {
-    category?: string;
-    subCategory?: string;
-    search?: string;
-    page?: number;
-    limit?: number;
-    isFeatured?: boolean;
-  } = {}) => {
-    const q = new URLSearchParams();
-    if (params.category) q.set('category', params.category);
-    if (params.subCategory) q.set('subCategory', params.subCategory);
-    if (params.search) q.set('search', params.search);
-    if (params.page) q.set('page', String(params.page));
-    if (params.limit) q.set('limit', String(params.limit));
-    if (params.isFeatured !== undefined) q.set('isFeatured', String(params.isFeatured));
-    return apiFetch<ProductListResponse>(`/public/products?${q.toString()}`);
-  },
-
+  //   getProducts: (params: {
+  //   category?: string;
+  //   subCategory?: string;
+  //   search?: string;
+  //   page?: number;
+  //   limit?: number;
+  //   isFeatured?: boolean;
+  // } = {}) => {
+  //   const q = new URLSearchParams();
+  //   if (params.category) q.set('category', params.category);
+  //   if (params.subCategory) q.set('subCategory', params.subCategory);
+  //   if (params.search) q.set('search', params.search);
+  //   if (params.page) q.set('page', String(params.page));
+  //   if (params.limit) q.set('limit', String(params.limit));
+  //   if (params.isFeatured !== undefined) q.set('isFeatured', String(params.isFeatured));
+  //   return apiFetch<ProductListResponse>(`/public/products?${q.toString()}`);
+  // },
+getProducts: (params: {
+  category?: string;
+  subCategory?: string;
+  parent?: string;
+  search?: string;
+  page?: number;
+  limit?: number;
+  isFeatured?: boolean;
+} = {}) => {
+  const q = new URLSearchParams();
+  if (params.category) q.set('category', params.category);
+  if (params.subCategory) q.set('subCategory', params.subCategory);
+  if (params.parent) q.set('parent', params.parent);
+  if (params.search) q.set('search', params.search);
+  if (params.page) q.set('page', String(params.page));
+  if (params.limit) q.set('limit', String(params.limit));
+  if (params.isFeatured !== undefined) q.set('isFeatured', String(params.isFeatured));
+  return apiFetch<ProductListResponse>(`/public/products?${q.toString()}`);
+},
   getProductBySlug: (slug: string) =>
     apiFetch<Product>(`/public/products/${slug}`),
 
   getServices: () => apiFetch<Service[]>('/public/services'),
   getServiceBySlug: (slug: string) =>
     apiFetch<Service>(`/public/services/${slug}`),
-
+getCategoryBySlug: (slug: string, parent?: string) => {
+  const q = parent ? `?parent=${encodeURIComponent(parent)}` : '';
+  return apiFetch<Category>(`/public/categories/${slug}${q}`);
+},
   getBlogCategories: () => apiFetch<BlogCategory[]>('/public/blog-categories'),
   getBlogPosts: (params: {
     category?: string;
@@ -248,7 +270,7 @@ export const api = {
     apiFetch<AnnouncementBar>('/public/announcement-bar'),
   getContactInfo: () => apiFetch<ContactInfo>('/public/contact-info'),
   getAboutUs: () => apiFetch<AboutUs>('/public/about-us'), 
-
+    getWarranty: () => apiFetch<Warranty>('/public/warranty'),
   submitContact: (data: {
     name: string;
     email: string;
